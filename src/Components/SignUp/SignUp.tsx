@@ -86,6 +86,9 @@ const SignIn = () => {
           )}
         </Password>
         <br />
+        <Curve>
+          <i>Please Fill this field</i>
+        </Curve>
         <br />
         <Button type="submit">Next</Button>
       </Card>
@@ -94,6 +97,30 @@ const SignIn = () => {
 };
 
 export default SignIn;
+
+const Curve = styled.div`
+  width: 150px;
+  i {
+    padding-top: 10px;
+    color: white;
+  }
+  height: 60px;
+  background-color: #0067b8;
+  position: relative;
+  display: flex;
+  border-radius: 2px;
+  justify-content: center;
+  ::after {
+    background-color: #0067b8;
+    content: "";
+    left: 4%;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    transform: rotate(45deg);
+    margin-top: -7px;
+  }
+`;
 
 const PasswordInput = styled.input`
   outline: 0;
