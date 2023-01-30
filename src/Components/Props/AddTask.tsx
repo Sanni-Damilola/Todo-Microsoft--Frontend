@@ -1,5 +1,5 @@
 import React from "react";
-import { HiOutlineBell } from "react-icons/hi";
+import { HiOutlineBell, HiOutlineSun } from "react-icons/hi";
 import { RiArrowUpDownLine } from "react-icons/ri";
 import { TfiLightBulb } from "react-icons/tfi";
 import styled from "styled-components";
@@ -7,14 +7,7 @@ import { IoCalendarOutline, IoRepeat } from "react-icons/io5";
 import { BsStar } from "react-icons/bs";
 import { IoIosCheckmark } from "react-icons/io";
 
-interface props {
-  icon: any;
-  title: string;
-  display: string;
-  color: string;
-}
-
-const AddTask: React.FC<props> = ({ color, icon, title, display }) => {
+const AddTask = () => {
   const [show, setShow] = React.useState(false);
   const [text, setText] = React.useState("");
 
@@ -22,16 +15,14 @@ const AddTask: React.FC<props> = ({ color, icon, title, display }) => {
     setShow(true);
   };
 
-  // const remove = () => {
-  //   setShow(false);
-  // };
-
   return (
     <Container>
       <Wrapper>
-        <Wrap c={color}>
-          <Icon dp={display}>{icon}</Icon>
-          <TaskTitle>{title}</TaskTitle>
+        <Wrap>
+          <Icon>
+            <HiOutlineSun />
+          </Icon>
+          <TaskTitle>planned</TaskTitle>
         </Wrap>
         <SortWrapAndSuggest>
           <Sort>
@@ -95,8 +86,8 @@ const AddTask: React.FC<props> = ({ color, icon, title, display }) => {
             </CheckIcon>
           </CheckBox>
           <TitleHold>
-            <TaskViewTitle>title</TaskViewTitle>
-            <Task>my day</Task>
+            <TaskViewTitle>anshb</TaskViewTitle>
+            <Task>task</Task>
           </TitleHold>
         </ViewWrapper>
         <MarkAsImportant>
@@ -205,9 +196,9 @@ const SuggestIcon = styled.div`
   margin-top: 3px;
 `;
 
-const Wrap = styled.div<{ c: string }>`
+const Wrap = styled.div`
   display: flex;
-  color: ${({ c }) => (c ? "rgb(0, 0, 0,0.7)" : "#2564cf")};
+  color: #2564cf;
   justify-content: center;
   align-items: center;
   position: relative;
@@ -252,8 +243,8 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
-const Icon = styled.div<{ dp: string }>`
-  display: ${({ dp }) => (dp ? "flex" : "none")};
+const Icon = styled.div`
+  display: flex;
   margin-top: 3px;
   justify-content: center;
   align-items: center;

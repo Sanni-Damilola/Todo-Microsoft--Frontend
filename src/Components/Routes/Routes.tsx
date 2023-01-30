@@ -11,11 +11,11 @@ import Task from "../Task/Task";
 const Routes = () => {
   const element = useRoutes([
     {
-      path: "/signUp",
+      path: "/",
       element: <SignUp />,
     },
     {
-      path: "/",
+      path: "/signin",
       element: <SignIn />,
     },
     {
@@ -24,7 +24,7 @@ const Routes = () => {
     },
     // {
     //   path: "/task",
-    //   children: [ 
+    //   children: [
     //     {
     //       index: true,
     //       element: <Task />,

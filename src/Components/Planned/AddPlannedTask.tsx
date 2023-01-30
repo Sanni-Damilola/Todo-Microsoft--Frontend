@@ -8,12 +8,7 @@ interface props {
 const AddPlannedTask: React.FC<props> = ({ display }) => {
   return (
     <div>
-      <AddTask
-        color=""
-        display={display}
-        title="planned"
-        icon={<IoCalendarOutline />}
-      />
+     
     </div>
   );
 };

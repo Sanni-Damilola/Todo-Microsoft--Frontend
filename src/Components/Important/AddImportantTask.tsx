@@ -7,11 +7,7 @@ interface props {
 }
 
 const AddImportantTask: React.FC<props> = ({ display }) => {
-  return (
-    <div>
-      <AddTask color="" display={display} title="important" icon={<BsStar />} />
-    </div>
-  );
+  return <div></div>;
 };
 
 export default AddImportantTask;

@@ -3,20 +3,14 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import img from "../Images/image.svg";
 import axios from "axios";
-import { allowAccess } from "../Global/GlobalContest";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { allowAccess } from "../Global/GlobalContest";
+
 
 const SignIn = () => {
   const [email, setEmail] = React.useState("");
   const [fullName, setFullName] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const context = React.useContext(allowAccess);
-
-  const [input, setInput] = React.useState(false);
-
-  const eye = () => {
-    setInput(!input);
-  };
 
   const navigate = useNavigate();
   const registerUser = async (e: any) => {
@@ -24,13 +18,23 @@ const SignIn = () => {
     await axios
       .post("http://localhost:2001/api/post", {
         name: fullName,
-        email: email,
-        password: password,
+        email,
+        password,
       })
       .then((res) => {
-        context?.setUserData(res.data.data);
-        navigate("/");
+        let captureData = window.localStorage.setItem(
+          "microSoftData",
+          JSON.stringify(res.data.data)
+        );
+        navigate("/signin");
+        console.log(captureData);
       });
+  };
+
+  
+  const [input, setInput] = React.useState(false);
+  const eye = () => {
+    setInput(!input);
   };
 
   return (
@@ -51,28 +55,30 @@ const SignIn = () => {
             setFullName(e.target.value);
           }}
           type="text"
+          minLength={6}
           placeholder="name"
         />{" "}
         <br />
         <Input
-          required
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
           }}
+          required
           type="email"
           placeholder="someone@example.com"
         />{" "}
         <br />
         <Password>
           <PasswordInput
-            required
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
             }}
+            required
             type={input ? "text" : "password"}
             placeholder="password"
+            minLength={6}
           />
 
           {input ? (
@@ -86,9 +92,11 @@ const SignIn = () => {
           )}
         </Password>
         <br />
-        <Curve>
-          <i>Please Fill this field</i>
-        </Curve>
+        {email === "" ? (
+          <Curve>
+            <i>Please Fill this field</i>
+          </Curve>
+        ) : null}
         <br />
         <Button type="submit">Next</Button>
       </Card>

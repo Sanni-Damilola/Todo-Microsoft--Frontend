@@ -14,11 +14,11 @@ const Header = () => {
     setShow(true);
   };
 
-  const context = React.useContext(allowAccess);
-
   const RemoveInput = () => {
     setShow(false);
   };
+
+  const context = React.useContext(allowAccess);
 
   return (
     <Container>
@@ -55,7 +55,7 @@ const Header = () => {
           <AiOutlineNotification />
         </Notification>
         <NameWrap>
-          <Name>{context?.userData.email.charAt(0)}</Name>
+          <Name>{context?.userData.name?.charAt(0)}</Name>
         </NameWrap>
       </Left>
     </Container>

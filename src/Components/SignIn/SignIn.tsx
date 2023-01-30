@@ -2,32 +2,33 @@ import axios from "axios";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { allowAccess } from "../Global/GlobalContest";
 import img from "../Images/image.svg";
 
 const SignIn = () => {
   const [email, setEmail] = React.useState("");
-  const context = React.useContext(allowAccess);
 
   const navigate = useNavigate();
-  const Login = async (e: any) => {
+  const signInUser = async (e: any) => {
     e.preventDefault();
     await axios
       .post("http://localhost:2001/api/login", {
-        email: email,
+        email,
       })
       .then((res) => {
-        context?.setUserData(res.data.data);
+        let captureData = window.localStorage.setItem(
+          "microSoftData",
+          JSON.stringify(res.data.data)
+        );
         navigate("/task");
       })
       .catch((err: any) => {
-        alert(err.response.data.message);
+        alert("User not found");
       });
   };
 
   return (
     <Container>
-      <Card onSubmit={Login}>
+      <Card onSubmit={signInUser}>
         <br />
         <br />
         <Image src={img} />
@@ -37,6 +38,7 @@ const SignIn = () => {
         <br />
         <br />
         <Input
+          required
           onChange={(e) => {
             setEmail(e.target.value);
           }}
